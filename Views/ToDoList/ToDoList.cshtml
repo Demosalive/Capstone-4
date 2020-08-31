@@ -1,0 +1,46 @@
+﻿@model List<ToDoList>
+
+<h1>To Do list for @ViewBag.UserName </h1>
+<table class="table table-bordered shadow table-hover table-info">
+
+    <tr class="d-table-row">
+        <th>Name</th>
+        <th>Description</th>
+        <th>DueDate</th>
+        <th>Completion Status</th>
+        <th>Delete To Do Item</th>
+    </tr>
+
+    @foreach (ToDoList todo in Model)
+    {
+        <tr class="d-table-row">
+            <td>@todo.Name</td>
+            <td>@todo.Description</td>
+            <td>@todo.DueDate.ToShortDateString()</td>
+
+            <td class="btn" model="post">
+                <a href="../ToDoList/MarkComplete?id=@todo.Id">Mark Complete</a>
+            </td>
+
+            @if (todo.Complete == true)
+            {
+                <td>Is Complete</td>
+            }
+            else
+            {
+                <td>Is Not Complete</td>
+            }
+
+            <td class="btn">
+                <a href="../ToDoList/DeleteToDoList?id=@todo.Id">Delete To Do List</a>    @*?=what we're sending     id="primary id"*@
+            </td>
+        </tr>
+    }
+   
+        <tr>
+            <th class="btn-lg" colspan="7">
+                <a href="../ToDoList/AddToDoList">Add a To Do Item</a>    @*?=what we're sending     id="primary id"*@
+            </th>
+        </tr>
+    
+</table>
